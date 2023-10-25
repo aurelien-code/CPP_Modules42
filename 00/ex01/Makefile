@@ -1,5 +1,5 @@
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Iheaders
+CXXFLAGS = -g -Wall -Wextra -Werror -std=c++98 -Iheaders
 SRC_DIR = sources
 OBJ_DIR = objects
 NAME = phonebook

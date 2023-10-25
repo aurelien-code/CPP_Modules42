@@ -11,9 +11,9 @@ int main()
 	{
 		std::cout << "Enter a command: ";
 		std::cin >> cmd;
-
 		if (std::cin.eof())
-			break;
+			return 0;
+		
 		if (cmd == "ADD")
 			pb.add();
 		else if (cmd == "SEARCH")

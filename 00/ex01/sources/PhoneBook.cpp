@@ -1,6 +1,8 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 #include <iomanip>
+#include <stdlib.h>
+#include <limits>
 
 PhoneBook::PhoneBook()
 {
@@ -42,52 +44,68 @@ void PhoneBook::add()
 
 	std::cout << "Your firstname: ";
 	std::cin >> fname;
+	if (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
+	}
 	std::cout << "Your lastname: ";
 	std::cin >> lname;
+	if (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
+	}
 	std::cout << "Your nickname: ";
 	std::cin >> nname;
+	if (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
+	}
 	std::cout << "Your phonenumber: ";
 	std::cin >> phone;
+	if (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
 
-	//Clean the buffer
-	char ch;
-    while (std::cin.get(ch) && ch != '\n') {}
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 	std::cout << "Your darkest secret: ";
 	std::getline(std::cin, secret);
 				
 	if (secret.empty())
-	{
 		std::cout << "Error: the contact cannot have empty fields" << std::endl;
-		return ;
-	}
 	else if (!is_valid_phonenumber(phone))
-	{
 		std::cout << "Error: phonenumber format is invalid" << std::endl;
-		return ;
-	}
-	if (_nb_of_contacts >= 8)
+	else
 	{
-		_nb_of_contacts = 0;
+		if (_nb_of_contacts >= 8)
+			_nb_of_contacts = 0;
+		else 
+		{
+			_contacts[_nb_of_contacts].set_first_name(fname);
+			_contacts[_nb_of_contacts].set_last_name(lname);
+			_contacts[_nb_of_contacts].set_nickname(nname);
+			_contacts[_nb_of_contacts].set_phonenumber(phone);
+			_contacts[_nb_of_contacts].set_darkest_secret(secret);
+			_nb_of_contacts++;
+		}
+		if (_phonebook_size < 8)
+			_phonebook_size++;
 	}
-	else 
-	{
-		_contacts[_nb_of_contacts].set_first_name(fname);
-		_contacts[_nb_of_contacts].set_last_name(lname);
-		_contacts[_nb_of_contacts].set_nickname(nname);
-		_contacts[_nb_of_contacts].set_phonenumber(phone);
-		_contacts[_nb_of_contacts].set_darkest_secret(secret);
-		_nb_of_contacts++;
-	}
-	if (_phonebook_size < 8)
-		_phonebook_size++;
 }
 
 void PhoneBook::search()
 {
 	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
     for (int i = 0; i < _phonebook_size; ++i) {
-        std::cout << "|" << std::setw(10) << i
+        std::cout << "|" << std::setw(10) << i + 1
                   << "|" << std::setw(10) << truncateAndFormat(_contacts[i].get_first_name())
                   << "|" << std::setw(10) << truncateAndFormat(_contacts[i].get_last_name())
                   << "|" << std::setw(10) << truncateAndFormat(_contacts[i].get_nickname())
@@ -97,11 +115,19 @@ void PhoneBook::search()
 	int idx;
 	std::cout << "Enter the index of the contact you want : ";
 	std::cin >> idx;
-	if (idx > 7 || idx < 0 || idx >= _phonebook_size)
+	if (std::cin.fail())
 	{
-		std::cout << "Error: index of contact out of range" << std::endl;
-		return ;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-	else 
-		std::cout << _contacts[idx];
+	else
+	{
+		if (idx > 7 || idx < 1 || idx > _phonebook_size)
+		{
+			std::cout << "Error: index of contact out of range" << std::endl;
+			return ;
+		}
+		else
+			std::cout << _contacts[idx - 1];
+	}
 }
