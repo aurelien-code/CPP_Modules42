@@ -12,3 +12,8 @@ $(TARGET): $(SRC)
 
 clean:
 	rm -f $(TARGET)
+
+fclean:
+	rm -f $(TARGET)
+
+re: fclean all
