@@ -8,7 +8,7 @@ class PhoneBook
 		int		_phonebook_size;
 		bool	is_valid_phonenumber(std::string phone);
 		std::string truncateAndFormat(std::string str);
-
+		void	ask_prompt(std::string str_field, std::string &var);
 	public:
 		PhoneBook(/* args */);
 		~PhoneBook();

@@ -38,44 +38,29 @@ std::string PhoneBook::truncateAndFormat(std::string str)
     return str.substr(0, 9) + ".";
 }
 
+void PhoneBook::ask_prompt(std::string str_field, std::string &var)
+{
+	std::cout << "Your " << str_field << ": ";
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::cin >> var;
+	if (std::cin.fail())
+	{
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return ;
+	}
+}
+
 void PhoneBook::add()
 {
 	std::string fname, lname, nname, phone, secret;
 
-	std::cout << "Your firstname: ";
-	std::cin >> fname;
-	if (std::cin.fail())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return ;
-	}
-	std::cout << "Your lastname: ";
-	std::cin >> lname;
-	if (std::cin.fail())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return ;
-	}
-	std::cout << "Your nickname: ";
-	std::cin >> nname;
-	if (std::cin.fail())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		return ;
-	}
-	std::cout << "Your phonenumber: ";
-	std::cin >> phone;
-	if (std::cin.fail())
-	{
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	}
+	ask_prompt("firstname", fname);
+	ask_prompt("lastname", lname);
+	ask_prompt("nickname", nname);
+	ask_prompt("phonenumber", phone);
 
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
 	std::cout << "Your darkest secret: ";
 	std::getline(std::cin, secret);
 				
