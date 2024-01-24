@@ -1,37 +1,13 @@
-// string::substr
+#include "Transform.hpp"
 #include <iostream>
-#include <string>
 
-int main()
+int main(int argc, char **argv)
 {
-	std::string str = "We think in generalities, but we live in details.";
-	std::string needle = "live";
-
-	std::size_t pos = str.find(needle);
-	if (pos != std::string::npos)
+	if (argc != 4)
 	{
-		// Check if the found string is an exact match
-		bool isExactMatch = true;
-		if (pos != 0 && isalnum(str[pos - 1]))
-		{
-			isExactMatch = false; // Character before is alphanumeric
-		}
-		if (pos + needle.length() < str.length() && isalnum(str[pos + needle.length()]))
-		{
-			isExactMatch = false; // Character after is alphanumeric
-		}
-
-		if (isExactMatch)
-		{
-			std::cout << "Exact match found at position: " << pos << std::endl;
-		}
-		else
-		{
-			std::cout << "Match found, but it's not an exact match." << std::endl;
-		}
+		std::cout << "Wrong number of arguments" << std::endl;
+		return (1);
 	}
-	else
-	{
-		std::cout << "No match found." << std::endl;
-	}
+	Transform transformation = Transform(argv[1], argv[2], argv[3]);
+	transformation.replace();
 }
