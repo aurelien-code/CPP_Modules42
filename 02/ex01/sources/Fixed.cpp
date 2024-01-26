@@ -52,7 +52,7 @@ int Fixed::getRawBits(void) const
 
 void Fixed::setRawBits(int raw)
 {
-	(void)raw; 
+	_value = raw;
 }
 
 int Fixed::toInt(void) const
