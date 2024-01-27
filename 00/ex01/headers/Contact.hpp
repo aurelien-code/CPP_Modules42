@@ -18,10 +18,11 @@ class Contact
 		void set_nickname(std::string val);
 		void set_phonenumber(std::string val);
 		void set_darkest_secret(std::string val);
-		std::string get_first_name();
-		std::string get_last_name();
-		std::string get_nickname();
-		std::string get_phonenumber();
-		std::string get_darkest_secret();
-	    friend std::ostream& operator<<(std::ostream& os, const Contact& contact);
+		std::string get_first_name() const;
+		std::string get_last_name() const;
+		std::string get_nickname() const;
+		std::string get_phonenumber() const;
+		std::string get_darkest_secret() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Contact& contact);
