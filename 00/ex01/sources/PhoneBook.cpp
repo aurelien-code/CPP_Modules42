@@ -14,7 +14,6 @@ PhoneBook::~PhoneBook()
 {
 }
 
-
 bool PhoneBook::is_valid_phonenumber(std::string phone)
 {
 	int i = 0;
@@ -30,7 +29,7 @@ bool PhoneBook::is_valid_phonenumber(std::string phone)
 	return true;
 }
 
-std::string PhoneBook::truncateAndFormat(std::string str)
+std::string PhoneBook::truncate_and_format(std::string str)
 {
     if (str.size() <= 10) {
         return str;
@@ -64,7 +63,7 @@ void PhoneBook::add()
 	std::cout << "Your darkest secret: ";
 	std::getline(std::cin, secret);
 				
-	if (secret.empty())
+	if (fname.empty() || lname.empty() || nname.empty() || phone.empty() || secret.empty())
 		std::cout << "Error: the contact cannot have empty fields" << std::endl;
 	else if (!is_valid_phonenumber(phone))
 		std::cout << "Error: phonenumber format is invalid" << std::endl;
@@ -72,15 +71,14 @@ void PhoneBook::add()
 	{
 		if (_nb_of_contacts >= 8)
 			_nb_of_contacts = 0;
-		else 
-		{
-			_contacts[_nb_of_contacts].set_first_name(fname);
-			_contacts[_nb_of_contacts].set_last_name(lname);
-			_contacts[_nb_of_contacts].set_nickname(nname);
-			_contacts[_nb_of_contacts].set_phonenumber(phone);
-			_contacts[_nb_of_contacts].set_darkest_secret(secret);
-			_nb_of_contacts++;
-		}
+
+		_contacts[_nb_of_contacts].set_first_name(fname);
+		_contacts[_nb_of_contacts].set_last_name(lname);
+		_contacts[_nb_of_contacts].set_nickname(nname);
+		_contacts[_nb_of_contacts].set_phonenumber(phone);
+		_contacts[_nb_of_contacts].set_darkest_secret(secret);
+		_nb_of_contacts++;
+	
 		if (_phonebook_size < 8)
 			_phonebook_size++;
 	}
@@ -88,26 +86,31 @@ void PhoneBook::add()
 
 void PhoneBook::search()
 {
+	if (_phonebook_size < 1)
+	{
+		std::cout << "Error: no contact in phonebook, add a contact first" << std::endl;
+		return ;
+	}
 	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
     for (int i = 0; i < _phonebook_size; ++i) {
         std::cout << "|" << std::setw(10) << i + 1
-                  << "|" << std::setw(10) << truncateAndFormat(_contacts[i].get_first_name())
-                  << "|" << std::setw(10) << truncateAndFormat(_contacts[i].get_last_name())
-                  << "|" << std::setw(10) << truncateAndFormat(_contacts[i].get_nickname())
+                  << "|" << std::setw(10) << truncate_and_format(_contacts[i].get_first_name())
+                  << "|" << std::setw(10) << truncate_and_format(_contacts[i].get_last_name())
+                  << "|" << std::setw(10) << truncate_and_format(_contacts[i].get_nickname())
                   << "|" << std::endl;
     }
 	
 	int idx;
 	std::cout << "Enter the index of the contact you want : ";
 	std::cin >> idx;
-	if (std::cin.fail())
+	if (std::cin.fail() || !std::cin.good())
 	{
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
 	else
 	{
-		if (idx > 7 || idx < 1 || idx > _phonebook_size)
+		if (idx > 8 || idx < 1 || idx > _phonebook_size)
 		{
 			std::cout << "Error: index of contact out of range" << std::endl;
 			return ;

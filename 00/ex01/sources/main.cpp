@@ -1,5 +1,9 @@
 #include <iostream>
 #include "PhoneBook.hpp"
+#include <string>
+#include <sstream>
+
+// Display a formatted list of contacts with their index
 
 int main()
 {
@@ -20,6 +24,14 @@ int main()
 			pb.search();
 		else if (cmd == "EXIT")
 			break;
+		else
+		{
+			std::cout << "Error: command not found, commands available (case sensitive): " << std::endl;
+			std::cout << "\t * ADD" << std::endl;
+			std::cout << "\t * SEARCH" << std::endl;
+			std::cout << "\t * EXIT" << std::endl;
+		}
 	}
+
 	return (0);
 }
