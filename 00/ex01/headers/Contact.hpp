@@ -1,6 +1,4 @@
 #include <string>
-//first name, last name, nickname, phone number, and
-// darkest secret. A saved contact can’t have empty fields.
 
 class Contact
 {
@@ -11,7 +9,7 @@ class Contact
 		std::string _phonenumber;
 		std::string _darkest_secret;
 	public:
-		Contact(/* args */);
+		Contact();
 		~Contact();
 		void set_first_name(std::string val);
 		void set_last_name(std::string val);

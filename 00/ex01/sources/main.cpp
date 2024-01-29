@@ -3,8 +3,6 @@
 #include <string>
 #include <sstream>
 
-// Display a formatted list of contacts with their index
-
 int main()
 {
 	PhoneBook pb;

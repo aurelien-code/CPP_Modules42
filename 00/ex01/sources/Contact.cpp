@@ -34,27 +34,33 @@ void Contact::set_darkest_secret(std::string val)
 	_darkest_secret = val;
 }
 
-std::string Contact::get_first_name() const {
+std::string Contact::get_first_name() const
+{
 	return _first_name;
 }
 
-std::string Contact::get_last_name() const{ 
+std::string Contact::get_last_name() const
+{ 
 	return _last_name;
 }
 
-std::string Contact::get_nickname() const{ 
+std::string Contact::get_nickname() const
+{ 
 	return _nickname;
 }
 
-std::string Contact::get_phonenumber() const{ 
+std::string Contact::get_phonenumber() const
+{ 
 	return _phonenumber;
 }
 
-std::string Contact::get_darkest_secret() const{
+std::string Contact::get_darkest_secret() const
+{
 	return _darkest_secret;
 }
 
-std::ostream& operator<<(std::ostream& os, const Contact& contact) {
+std::ostream& operator<<(std::ostream& os, const Contact& contact)
+{
     os << "First Name: " << contact.get_first_name() << std::endl;
 	os << "Last Name: " << contact.get_last_name() << std::endl;
 	os << "Nickname: " << contact.get_nickname() << std::endl;

@@ -88,7 +88,7 @@ void PhoneBook::search()
 {
 	if (_phonebook_size < 1)
 	{
-		std::cout << "Error: no contact in phonebook, add a contact first" << std::endl;
+		std::cout << "Error: phonebook is empty, add a contact first" << std::endl;
 		return ;
 	}
 	std::cout << "|     Index|First Name| Last Name|  Nickname|" << std::endl;
