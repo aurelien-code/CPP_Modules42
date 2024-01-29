@@ -3,6 +3,8 @@
 
 int main(void)
 {
+
+	test1();
 	Fixed a;
 	Fixed const b( 10 );
 	Fixed const c( 42.42f );
