@@ -41,7 +41,6 @@ void Transform::replace(void)
 {
 	std::string line;
 	std::ifstream in_file(_file_path.c_str());
-	std::ofstream out_file((_file_path + ".replace").c_str());
 	std::size_t pos = 0;
 
 	if (!in_file.is_open())
@@ -49,10 +48,14 @@ void Transform::replace(void)
 		std::cout << "Error: could not open in_file" << std::endl;
 		return;
 	}
+	std::ofstream out_file((_file_path + ".replace").c_str());
 	while (getline(in_file, line))
 	{
 		pos = line.find(_s1);
-		out_file << _replace_in_line(line) << std::endl;
+		if (!pos)
+			out_file << line << std::endl;
+		else
+			out_file << _replace_in_line(line) << std::endl;
 	}
 	in_file.close();
 	out_file.close();

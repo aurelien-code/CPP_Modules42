@@ -2,16 +2,19 @@
 #include "HumanB.hpp"
 #include <iostream>
 
-HumanB::HumanB(std::string name): _name(name) {
+HumanB::HumanB(std::string name): _name(name)
+{
 	_weapon = 0;
 	return;
 }
 
-HumanB::~HumanB(void) {
+HumanB::~HumanB(void)
+{
 	return;
 }
 
-void HumanB::attack(void) {
+void HumanB::attack(void)
+{
 	if (!_weapon)
 		std::cout << _name << " attacks without a weapon" << std::endl;
 	else
@@ -19,7 +22,8 @@ void HumanB::attack(void) {
 	return;
 }
 
-void HumanB::setWeapon(Weapon &weapon) {
+void HumanB::setWeapon(Weapon &weapon)
+{
 	_weapon = &weapon;
 	return;
 }
