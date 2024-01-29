@@ -12,7 +12,7 @@ Fixed::Fixed(void)
 Fixed::Fixed(const int value)
 {
 	// std::cout << "Int constructor called" << std::endl;
-	_value = value * (1 << _bits);
+	_value = roundf(value * (1 << _bits));
 }
 
 Fixed::Fixed(const float value)
@@ -103,9 +103,11 @@ bool Fixed::operator<=(Fixed const &ref)
 	return (this->_value <= ref.getRawBits());
 }
 
-bool Fixed::operator==(Fixed const &ref)
+bool Fixed::operator==(Fixed const &ref) const
 {
-	return (this->_value == ref.getRawBits());
+	std::cout << "this_raw_bits = " << this->getRawBits() << std::endl;
+	std::cout << "ref_raw_bits = " << this->getRawBits() << std::endl;
+	return (this->getRawBits() == ref.getRawBits());
 }
 
 bool Fixed::operator!=(Fixed const &ref)
@@ -162,7 +164,7 @@ const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
 int Fixed::getRawBits(void) const
 {
 	// std::cout << "getRawBits member function called" << std::endl;
-	return (_value);
+	return roundf(_value);
 }
 
 void Fixed::setRawBits(int raw)
@@ -172,10 +174,10 @@ void Fixed::setRawBits(int raw)
 
 int Fixed::toInt(void) const
 {
-	return _value >> _bits;
+	return roundf(_value >> _bits);
 }
 
 float Fixed::toFloat(void) const
 {
-	return (float)(_value) / (float)(1 << _bits);
+	return roundf((float)(_value) / (float)(1 << _bits));
 }

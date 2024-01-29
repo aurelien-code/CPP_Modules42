@@ -9,6 +9,7 @@ class Point
 	private:
 		Fixed x;
 		Fixed y;
+		Fixed get_abs(Fixed value) const;
 	public:
 		Point();
 		Point(const Point &p);
