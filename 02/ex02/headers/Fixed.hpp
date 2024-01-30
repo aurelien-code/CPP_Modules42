@@ -1,5 +1,8 @@
 #include <fstream>
 
+#ifndef FIXED_HPP
+#define FIXED_HPP
+
 class Fixed
 {
 	private:
@@ -16,10 +19,10 @@ class Fixed
 		friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 		
 		Fixed &operator=(const Fixed &ref);
-		Fixed &operator+(const Fixed &ref);
-		Fixed &operator-(const Fixed &ref);
-		Fixed &operator*(const Fixed &ref);
-		Fixed &operator/(const Fixed &ref);
+		Fixed operator+(const Fixed &ref) const;
+		Fixed operator-(const Fixed &ref) const;
+		Fixed operator*(const Fixed &ref) const;
+		Fixed operator/(const Fixed &ref) const;
 
 
 		bool operator>(const Fixed &ref);
@@ -28,7 +31,7 @@ class Fixed
 		bool operator<(const Fixed &ref) const;
 		bool operator>=(const Fixed &ref);
 		bool operator<=(const Fixed &ref);
-		bool operator==(const Fixed &ref);
+		bool operator==(const Fixed &ref) const;
 		bool operator!=(const Fixed &ref);
 
 		Fixed &operator++(void);
@@ -38,11 +41,14 @@ class Fixed
 
 		static Fixed &min(Fixed &a, Fixed &b);
 		static Fixed &max(Fixed &a, Fixed &b);
-		const static Fixed &min(const Fixed &a, const Fixed &b);
-		const static Fixed &max(const Fixed &a, const Fixed &b);
+		static const Fixed &min(const Fixed &a, const Fixed &b);
+		static const Fixed &max(const Fixed &a, const Fixed &b);
 
 		int getRawBits(void) const;
 		void setRawBits(int raw);
+
 		float toFloat(void) const;
 		int toInt(void) const;
 };
+
+#endif

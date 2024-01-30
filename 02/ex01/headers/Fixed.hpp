@@ -13,9 +13,12 @@ class Fixed
 		Fixed(const Fixed &ref);
 		~Fixed();
 		Fixed &operator=(const Fixed &ref);
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
+		// also work with:
+		// friend std::ostream& operator<<(std::ostream& os, const Fixed& fixed);
 		int getRawBits(void) const;
 		void setRawBits(int raw);
 		float toFloat(void) const;
 		int toInt(void) const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& fixed);

@@ -1,37 +1,34 @@
 #include <iostream>
 #include "Fixed.hpp"
 #include "Point.hpp"
+#include "bsp.hpp"
 
 int main(void)
 {
-	// Fixed A_x(406);
-	// Fixed A_y(328);
+	//	Triangle
+	Point a((438.9f), (38.99f));
+	Point b((616.60f), (612.85f));
+	Point c((332.40f), (514.85f));
 
-	// Fixed E_x(302);
-	// Fixed E_y(324);
+	Point A_pt(406.0f, 328.0f);
+	bool result_A = bsp(a, b, c, A_pt); // true
 
-	// Fixed F_x(603.7899f);
-	// Fixed F_y(236.6299f);
+	Point E_pt(302.0f, 324.0f);
+	bool result_E = bsp(a, b, c, E_pt); // false
 
-	Fixed G_x(517.2942f);
-	Fixed G_y(489.7899f);
+	Point F_pt(603.7899f, 236.6299f);
+	bool result_F = bsp(a, b, c, F_pt); // false
 
-	// Fixed H_x(508.740f);
-	// Fixed H_y(264.530f);
-	//Triangle
-	Point a(Fixed(438.9f), Fixed(38.99f));
-	Point b(Fixed(616.60f), Fixed(612.85f));
-	Point c(Fixed(332.40f), Fixed(514.85f));
+	Point G_pt(517.2942f, 489.7899f);
+	bool result_G = bsp(a, b, c, G_pt); // true
 
-	// bool result_A = b.bsp(a, b, c, Point(A_x, A_y)); // true
-	// bool result_E = b.bsp(a, b, c, Point(E_x, E_y)); // false
-	// bool result_F = b.bsp(a, b, c, Point(F_x, F_y)); // false
-	bool result_G = b.bsp(a, b, c, Point(G_x, G_y)); // true
-	// bool result_H = b.bsp(a, b, c, Point(H_x, H_y)); // false
-	// std::cout << "Point A -> result_true: " << result_A << "\n";
-	// std::cout << "Point E -> result_false: " << result_E << "\n";
-	// std::cout << "Point F -> result_false: " << result_F << "\n";
+	Point H_pt(508.740f, 264.530f);
+	bool result_H = bsp(a, b, c, H_pt); // false
+
+	std::cout << "Point A -> result_true: " << result_A << "\n";
+	std::cout << "Point E -> result_false: " << result_E << "\n";
+	std::cout << "Point F -> result_false: " << result_F << "\n";
 	std::cout << "Point G -> result_true: " << result_G << "\n";
-	// std::cout << "Point H -> result_false: " << result_H << "\n";
+	std::cout << "Point H -> result_false: " << result_H << "\n";
 	return 0;
 }

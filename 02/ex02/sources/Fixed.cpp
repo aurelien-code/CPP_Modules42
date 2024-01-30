@@ -5,30 +5,35 @@
 Fixed::Fixed(void)
 {
 	_value = 0;
-	// std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int value)
 {
-	// std::cout << "Int constructor called" << std::endl;
-	_value = value * (1 << _bits);
+	this->_value = value << this->_bits;
 }
 
 Fixed::Fixed(const float value)
 {
-	// std::cout << "Float constructor called" <<  std::endl;
-	_value = roundf(value * (1 << _bits));
+	this->_value = roundf(value * (1 << this->_bits));
 }
 
 Fixed::Fixed(Fixed const &ref)
 {
-	// std::cout << "Copy constructor called" << std::endl;
 	*this = ref;	
 }
 
 Fixed::~Fixed(void)
 {
-	// std::cout << "Destructor called" << std::endl;
+}
+
+
+Fixed &Fixed::operator=(Fixed const &ref)
+{
+	if (this != &ref)
+	{
+		this->setRawBits(ref.getRawBits());
+	}
+	return (*this);
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
@@ -37,59 +42,56 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed)
     return os;
 }
 
-Fixed &Fixed::operator=(Fixed const &ref)
+Fixed Fixed::operator+(Fixed const &ref) const
 {
-	// std::cout << "Copy assignment operator called" << std::endl;
-	this->_value = ref.getRawBits();
-	return (*this);
+	Fixed sum;
+
+	sum.setRawBits(this->getRawBits() + ref.getRawBits());
+	return (sum);
 }
 
-Fixed &Fixed::operator+(Fixed const &ref)
+Fixed Fixed::operator-(Fixed const &ref) const
 {
-	// std::cout << "Addition operator called" << std::endl;
-	this->_value += ref.getRawBits();
-	return (*this);
+	Fixed diff;
+
+	diff.setRawBits(this->getRawBits() - ref.getRawBits());
+	return (diff);
 }
 
-Fixed &Fixed::operator-(Fixed const &ref)
+Fixed Fixed::operator*(Fixed const &ref) const
 {
-	// std::cout << "Subtraction operator called" << std::endl;
-	this->_value -= ref.getRawBits();
-	return (*this);
+	Fixed result;
+
+	result.setRawBits(this->toFloat() * ref.toFloat());
+	return (result);
 }
 
-Fixed &Fixed::operator*(Fixed const &ref)
+Fixed Fixed::operator/(Fixed const &ref) const
 {
-	// std::cout << "Multiplication operator called" << std::endl;
-	this->_value *= ref.toFloat();
-	return (*this);
-}
+	Fixed quotient;
 
-Fixed &Fixed::operator/(Fixed const &ref)
-{
-	// std::cout << "Division operator called" << std::endl;
-	this->_value /= ref.toFloat();
-	return (*this);
+	quotient.setRawBits(this->toFloat() / ref.toFloat());
+	return (quotient);
 }
 
 bool Fixed::operator>(Fixed const &ref)
 {
-	return (this->_value > ref.getRawBits());
+	return (this->getRawBits() > ref.getRawBits());
 }
 
 bool Fixed::operator>(Fixed const &ref) const
 {
-	return (this->_value > ref.getRawBits());
+	return (this->getRawBits() > ref.getRawBits());
 }
 
 bool Fixed::operator<(Fixed const &ref)
 {
-	return (this->_value < ref.getRawBits());
+	return (this->getRawBits() < ref.getRawBits());
 }
 
 bool Fixed::operator<(Fixed const &ref) const
 {
-	return (this->_value < ref.getRawBits());
+	return (this->getRawBits() < ref.getRawBits());
 }
 
 bool Fixed::operator>=(Fixed const &ref)
@@ -99,18 +101,19 @@ bool Fixed::operator>=(Fixed const &ref)
 
 bool Fixed::operator<=(Fixed const &ref)
 {
-	return (this->_value <= ref.getRawBits());
+	return (this->getRawBits() <= ref.getRawBits());
 }
 
-bool Fixed::operator==(Fixed const &ref)
+bool Fixed::operator==(Fixed const &ref) const
 {
-	return (this->_value == ref.getRawBits());
+	return (this->getRawBits() == ref.getRawBits());
 }
 
 bool Fixed::operator!=(Fixed const &ref)
 {
-	return (this->_value != ref.getRawBits());
+	return (this->getRawBits() != ref.getRawBits());
 }
+
 
 Fixed &Fixed::operator++(void)
 {
@@ -160,21 +163,20 @@ const Fixed &Fixed::max(const Fixed &a, const Fixed &b)
 
 int Fixed::getRawBits(void) const
 {
-	// std::cout << "getRawBits member function called" << std::endl;
-	return (_value);
+	return this->_value;
 }
 
 void Fixed::setRawBits(int raw)
 {
-	(void)raw; 
+	this->_value = raw; 
 }
 
 int Fixed::toInt(void) const
 {
-	return _value >> _bits;
+	return (this->_value >> this->_bits);
 }
 
 float Fixed::toFloat(void) const
 {
-	return (float)(_value) / (float)(1 << _bits);
+	return ((float)(this->_value / (float)(1 << this->_bits)));
 }

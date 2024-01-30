@@ -4,7 +4,7 @@ SRC_DIR		=	sources
 OBJ_DIR		=	objects
 NAME		=	BSP
 
-SRC			=	main.cpp Point.cpp  Fixed.cpp 
+SRC			=	main.cpp Point.cpp Fixed.cpp bsp.cpp
 OBJ			=	$(SRC:.cpp=.o)
 OBJ_PATH	=	$(addprefix $(OBJ_DIR)/, $(OBJ))
 
