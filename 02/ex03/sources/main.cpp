@@ -22,8 +22,11 @@ int main(void)
 	Point G_pt(517.2942f, 489.7899f);
 	bool result_G = bsp(a, b, c, G_pt); // true
 
-	Point H_pt(508.740f, 264.530f);
-	bool result_H = bsp(a, b, c, H_pt); // false
+	Point a_a(0, 10);
+	Point b_b(10, 0);
+	Point c_c(0,0);
+	Point H_pt(5, 0);
+	bool result_H = bsp(a_a, b_b, c, H_pt); // false
 
 	std::cout << "Point A -> result_true: " << result_A << "\n";
 	std::cout << "Point E -> result_false: " << result_E << "\n";
