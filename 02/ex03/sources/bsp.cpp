@@ -9,9 +9,6 @@ float	vect_product(Point const a, Point const b, Point const point) {
     -   point.getX())).toFloat());
 }
 
-//Create the function for a line equation
-//Check if the point is on the line
-
 bool	bsp(Point const a, Point const b, Point const c, Point const point) {
     float abp = vect_product(a, b, point);
     float bcp = vect_product(b, c, point);
