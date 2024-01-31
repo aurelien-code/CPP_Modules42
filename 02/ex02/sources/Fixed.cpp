@@ -124,7 +124,7 @@ Fixed &Fixed::operator++(void)
 Fixed Fixed::operator++(int)
 {
 	Fixed tmp = *this;
-	operator++();
+	++(*this);
 	return (tmp);
 }
 
@@ -138,6 +138,7 @@ Fixed Fixed::operator--(int)
 {
 	Fixed tmp = *this;
 	operator--();
+	--(*this);
 	return (*this);
 }
 
