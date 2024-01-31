@@ -61,18 +61,17 @@ Fixed Fixed::operator-(Fixed const &ref) const
 
 Fixed Fixed::operator*(Fixed const &ref) const
 {
-	Fixed result;
+	// Fixed result;
+	// result.setRawBits(roundf((this->toFloat() * ref.toFloat()) * (1 << this->_bits)));
 
-	result.setRawBits(this->toFloat() * ref.toFloat());
-	return (result);
+	return (Fixed(this->toFloat() * ref.toFloat()));
 }
 
 Fixed Fixed::operator/(Fixed const &ref) const
 {
-	Fixed quotient;
-
-	quotient.setRawBits(this->toFloat() / ref.toFloat());
-	return (quotient);
+	// Fixed quotient;
+	// quotient.setRawBits(roundf((this->toFloat() / ref.toFloat()) * (1 << this->_bits)));
+	return (Fixed(this->toFloat() / ref.toFloat()));
 }
 
 bool Fixed::operator>(Fixed const &ref)

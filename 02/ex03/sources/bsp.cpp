@@ -16,7 +16,7 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point) {
 
 	if (!abp || !bcp || !cap)
 		return (0);
-	else if ((abp > 0 && bcp > 0 && cap > 0) || (!(abp <= 0) && !(bcp <= 0) && !(cap <= 0)))
+	else if ((abp > 0 && bcp > 0 && cap > 0) || ((abp < 0) && (bcp < 0) && (cap < 0)))
     {
 		return (1);
     }
