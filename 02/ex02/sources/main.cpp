@@ -18,11 +18,18 @@ int main(void)
 
 	Fixed c(-2.4f);
 	Fixed d(-4.0f);
-	std::cout << c - d << std::endl;
-	std::cout << c * d << std::endl;
-	std::cout << c / d << std::endl;
-	std::cout << c + d << std::endl;
-	std::cout << Fixed::max(c,d) << std::endl;
-	std::cout << Fixed::min(c,d) << std::endl;
+	std::cout << "c:\t" << (c) << std::endl;
+	std::cout << "d:\t" << (d) << std::endl;
+	std::cout << "c*d:\t" << c * d << std::endl;
+	std::cout << "c/d:\t" << c / d << std::endl;
+	std::cout << "c+d:\t" << c + d << std::endl;
+	std::cout << "c-d:\t" << c - d << std::endl;
+	std::cout << "c++:\t" << c++ << std::endl;
+	std::cout << "++c:\t" << ++c << std::endl;
+	std::cout << "c--:\t" << c-- << std::endl;
+	std::cout << "--c:\t" << --c << std::endl;
+	std::cout << "max:\t" << Fixed::max(c,d) << std::endl;
+	std::cout << "min:\t" << Fixed::min(c,d) << std::endl;
+
 	return 0;
 }
