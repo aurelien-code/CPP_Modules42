@@ -122,8 +122,9 @@ Fixed &Fixed::operator++(void)
 
 Fixed Fixed::operator++(int)
 {
-	++(*this);
-	return (*this);
+	Fixed tmp(*this);
+	++tmp;
+	return (tmp);
 }
 
 Fixed &Fixed::operator--(void)
@@ -134,8 +135,9 @@ Fixed &Fixed::operator--(void)
 
 Fixed Fixed::operator--(int)
 {
-	--(*this);
-	return (*this);
+	Fixed tmp(*this);
+	--tmp;
+	return (tmp);
 }
 
 Fixed &Fixed::min(Fixed &a, Fixed &b)
