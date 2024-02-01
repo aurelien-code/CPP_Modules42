@@ -3,6 +3,7 @@
 
 int main()
 {
+	//MAKE MORE TESTS
 	ClapTrap clap("Erouck");
 	ClapTrap clap_bis("Zozivion");
 

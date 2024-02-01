@@ -11,6 +11,7 @@ class ClapTrap
 		int _attackDamage;
 	public:
 		ClapTrap(std::string name);
+		ClapTrap(std::string name, int hp, int ep, int ad);
 		ClapTrap(const ClapTrap &copy);
 		~ClapTrap();
 		ClapTrap &operator=(const ClapTrap &copy);

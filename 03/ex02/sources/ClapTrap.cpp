@@ -5,6 +5,10 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hitpoints(10), _energyPoint
 {
 	std::cout << "ClapTrap " << this->_name << " is born!" << std::endl;
 }
+ClapTrap::ClapTrap(std::string name, int hp, int ep, int ad) : _name(name), _hitpoints(hp), _energyPoints(ep), _attackDamage(ad)
+{
+	std::cout << "ClapTrap " << this->_name << " is born!" << std::endl;
+}
 
 ClapTrap::ClapTrap(const ClapTrap &copy)
 {
