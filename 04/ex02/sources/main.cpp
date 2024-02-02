@@ -19,24 +19,13 @@ int main()
 	const AAnimal* j = new Dog();
 	const AAnimal* i = new Cat();
 
-	const WrongAnimal* wrong_meta = new WrongAnimal();
-	const WrongAnimal* wrong_j = new WrongCat();
-
-	std::cout << "j_type = " << j->getType() << " " << std::endl;
-	std::cout << "i_type = " << i->getType() << " " << std::endl;
+	std::cout << "j_type = " << j->getType() << " and his sound is :  ";
 	i->makeSound(); //will output the cat sound!
+	std::cout << "i_type = " << i->getType() << " and his sound is : ";
 	j->makeSound();
-
-	std::cout << "### wrong animal from now ###" << std::endl;
-	std::cout << "wj_type = " << wrong_j->getType() << " " << std::endl;
-	wrong_j->makeSound();
-	std::cout << "wm_type = " << wrong_meta->getType() << " " << std::endl;
-	wrong_meta->makeSound();
 
 	delete j;
 	delete i;
-	delete wrong_meta;
-	delete wrong_j;
 
 	const int size = 10;
     AAnimal** animals = new AAnimal*[size];

@@ -12,6 +12,7 @@ Cat::Cat(const Cat &copy)
 {
 	std::cout << "Cat constructor copy called"	<< std::endl;
 	this->type = copy.type;
+	this->brain = new Brain(*copy.brain);
 }
 
 Cat &Cat::operator=(const Cat &copy)

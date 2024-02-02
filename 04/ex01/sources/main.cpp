@@ -5,47 +5,23 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+# define GREEN	"\033[32m"
+# define WHITE	"\033[37m"
 
 int main()
 {
-//	Do not forget to provide the maximum tests.
-	const Animal* meta = new Animal();
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
-
-	const WrongAnimal* wrong_meta = new WrongAnimal();
-	const WrongAnimal* wrong_j = new WrongCat();
-
-	std::cout << "j_type = " << j->getType() << " " << std::endl;
-	std::cout << "i_type = " << i->getType() << " " << std::endl;
-	i->makeSound(); //will output the cat sound!
-	j->makeSound();
-
-	std::cout << "### wrong animal from now ###" << std::endl;
-	std::cout << "wj_type = " << wrong_j->getType() << " " << std::endl;
-	wrong_j->makeSound();
-	std::cout << "wm_type = " << wrong_meta->getType() << " " << std::endl;
-	wrong_meta->makeSound();
-	meta->makeSound();
-
-	delete meta;
-	delete j;
-	delete i;
-	delete wrong_meta;
-	delete wrong_j;
-
-	const int size = 10;
+	std::cout << GREEN << "~test array of animals~" << WHITE << std::endl;
+	const int size = 5;
     Animal** animals = new Animal*[size];
 
-    for (int i = 0; i < size / 2; ++i) {
-        animals[i] = new Dog();
-    }
-    for (int i = size / 2; i < size; ++i) {
-        animals[i] = new Cat();
-    }
-
     for (int i = 0; i < size; ++i) {
-        std::cout << "Animal type = " << animals[i]->getType() << std::endl;
+		if (i < size / 2)
+        	animals[i] = new Dog();
+		else
+        	animals[i] = new Cat();
+	}
+    for (int i = 0; i < size; ++i) {
+        std::cout << "Animal type = " << animals[i]->getType() << " and his sound is : ";
         animals[i]->makeSound();
     }
     for (int i = 0; i < size; ++i) {
@@ -53,10 +29,16 @@ int main()
     }
     delete[] animals;
 
+	std::cout << GREEN << "~test leaks as showned in subject~" << WHITE << std::endl;
 	const Animal* t = new Dog();
 	const Animal* x = new Cat();
 	delete t;//should not create a leak
 	delete x;
 
+	std::cout << GREEN << "~test deepcopies~" << WHITE << std::endl;
+	Dog* d1 = new Dog();
+	Dog* d2 = new Dog(*d1);
+	delete d1;
+	delete d2;
     return 0;
 }
