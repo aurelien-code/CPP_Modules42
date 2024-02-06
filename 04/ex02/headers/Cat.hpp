@@ -10,6 +10,6 @@ class Cat: public AAnimal
 		Cat &operator=(const Cat &copy);
 		~Cat();
 		void makeSound() const;
-		Brain* get_brain(void);
+		Brain* get_brain(void) const;
 
 };

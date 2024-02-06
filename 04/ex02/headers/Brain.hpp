@@ -7,7 +7,6 @@ class Brain
 {
 	protected:
 		std::string ideas[100];
-		std::string idea;		
 	public:
 		Brain();
 		Brain(const Brain &copy);

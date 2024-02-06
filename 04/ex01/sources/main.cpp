@@ -35,18 +35,39 @@ int main()
 	delete t;//should not create a leak
 	delete x;
 
-	std::cout << GREEN << "~test deepcopies~" << WHITE << std::endl;
+	//d1 and d2 should have differents adresses
+	std::cout << GREEN << "~test deepcopies copy op~" << WHITE << std::endl;
 	Dog* d1 = new Dog();
 	Dog* d2 = new Dog(*d1);
+	std::cout << "Adress of d1 = " << &d1 << std::endl;
+	std::cout << "Adress of d2 = " << &d2 << std::endl;
+	std::cout << "Adress of d1.brain = " << (d1->get_brain()) << std::endl;
+	std::cout << "Adress of d2.brain = " << (d2->get_brain()) << std::endl;
 	delete d1;
 	delete d2;
+	
+	//d5 and d6 should have differents adresses
+	std::cout << GREEN << "~test deepcopies assign op heap~" << WHITE << std::endl;
+	Dog* d5 = new Dog();
+	Dog* d6 = new Dog();
+	*d6 = *d5;
+	std::cout << "Adress of d5 = " << &d5 << std::endl;
+	std::cout << "Adress of d6 = " << &d6 << std::endl;
+	std::cout << "Adress of d5.brain = " << (d5->get_brain()) << std::endl;
+	std::cout << "Adress of d6.brain = " << (d6->get_brain()) << std::endl;
+	delete d5;
+	delete d6;
 
-	std::cout << GREEN << "~test deepcopies 2~" << WHITE << std::endl;
+	//d3 and d4 should have differents adresses
+	std::cout << GREEN << "~test deepcopies assign op stack~" << WHITE << std::endl;
 	Dog d3;
 	Dog d4 = d3;
 	std::cout << "Adress of d3 = " << &d3 << std::endl;
 	std::cout << "Adress of d4 = " << &d4 << std::endl;
 	std::cout << "Adress of d3.brain = " << (d3.get_brain()) << std::endl;
 	std::cout << "Adress of d4.brain = " << (d4.get_brain()) << std::endl;
+	
+
+
     return 0;
 }
