@@ -14,10 +14,13 @@ ClapTrap::ClapTrap(const ClapTrap &copy)
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &copy)
 {
-	this->_name = copy._name;
-	this->_hitpoints = copy._hitpoints;
-	this->_energyPoints = copy._energyPoints;
-	this->_attackDamage = copy._attackDamage;
+	if (this != &copy)
+	{
+		this->_name = copy._name;
+		this->_hitpoints = copy._hitpoints;
+		this->_energyPoints = copy._energyPoints;
+		this->_attackDamage = copy._attackDamage;
+	}
 	return (*this);
 }
 
