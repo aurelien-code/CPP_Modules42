@@ -31,5 +31,32 @@ FragTrap::~FragTrap()
 
 void FragTrap::highFivesGuys()
 {
-	std::cout << "FragTrap " << this->_name << " is asking for high fives" << std::endl;
+	if (this->_hitpoints > 0 && this->_energyPoints > 0)
+		std::cout << "FragTrap " << this->_name << " is asking for high fives" << std::endl;
+	else if (this->_hitpoints > 0 && this->_energyPoints <= 0)
+		std::cout << this->_name << " is out of energy!" << std::endl;
+	else
+		std::cout << this->_name << " is already dead!" << std::endl;
+
+}
+
+
+void FragTrap::attack(const std::string &target)
+{
+	if (this->_hitpoints > 0 && this->_energyPoints > 0)
+	{
+		this->_energyPoints--;
+		std::cout << "FragTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
+	}
+	else
+	{
+		if (this->_hitpoints <= 0)
+		{
+			std::cout << "FragTrap " << this->_name << " can't attack " << target << " because he is dead!" << std::endl;
+		}
+		else if (this->_energyPoints <= 0)
+		{
+			std::cout << "FragTrap " << this->_name << " can't attack " << target << " because he is out of energy!" << std::endl;
+		}	
+	}
 }

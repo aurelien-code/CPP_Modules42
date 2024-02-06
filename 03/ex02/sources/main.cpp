@@ -1,22 +1,68 @@
 #include <iostream>
-#include "ScavTrap.hpp"
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
+	
+# define GREEN	"\033[32m"
+# define WHITE	"\033[37m"
 
 int main()
 {
-	ClapTrap erouk_clap("Erouck");
-	ClapTrap zozi_clap("Zozivion");
+	ClapTrap zoz("Zozivion");
+	ScavTrap erik("Erouck");
+	FragTrap rodo("Rodolph");
+	std::cout << GREEN << "~~~~~~~~~Show HP of everyone~~~~~~~~~~" << WHITE << std::endl;
 
-	erouk_clap.attack("Zozivion");
-	zozi_clap.takeDamage(erouk_clap.getAttackDamage());
-	zozi_clap.getHitpoints();
+	//Show HP of everyone
+	zoz.showHitpoints();
+	erik.showHitpoints();
+	rodo.showHitpoints();
+	std::cout << GREEN << "~~~~~~~~Zoz attak erik~~~~~~~~~~~" << WHITE << std::endl;
+	
+	//Zoz attak erik
+	zoz.attack("Erouck");
+	erik.takeDamage(0);
+	erik.showHitpoints();
+	std::cout << GREEN << "~~~~~~~Erik counter attack~~~~~~~~~~~~" << WHITE << std::endl;
 
-	ScavTrap scav("Jerem");
-	scav.guardGate();
+	//Erik counter attack
+	erik.attack("Zoz");
+	zoz.takeDamage(10);
+	zoz.showHitpoints();
+	std::cout << GREEN << "~~~~~Zoz tries to repair himself~~~~~~~~~~~~~~" << WHITE << std::endl;
 
-	FragTrap frag("Daniel");
-	frag.highFivesGuys();
-	frag.attack("Jerem");
-	scav.takeDamage(frag.getAttackDamage());
+	//Zoz tries to repair himself
+	zoz.beRepaired(10);
+	std::cout << GREEN  << "~~~~~~~Rodo attak erik~~~~~~~~~~~~" <<  WHITE << std::endl;
+
+	//Rodo attak erik
+	rodo.attack("Erouck");
+	erik.takeDamage(9);
+	erik.showHitpoints();
+	std::cout << GREEN << "~~~~~~Erik repairs himself ~~~~~~~~~~~~~" << WHITE << std::endl;
+
+	//Erik repairs himself 
+	erik.beRepaired(9);
+	erik.showHitpoints();
+	std::cout << GREEN << "~~~~~~Erick attak rodolph~~~~~~~~~~~~~" << WHITE << std::endl;
+
+	//Erick attak rodolph
+	erik.attack("Rodolph");
+	rodo.takeDamage(20);
+	rodo.showHitpoints();
+	std::cout << GREEN << "~~~~~~Erik hard attak rodo and rodo tries to attackback~~~~~~~~~~~~~" << WHITE <<  std::endl;
+
+	//Erik hard attak rodo and rodo tries to attackback
+	erik.attack("Rodolph");
+	rodo.takeDamage(30);
+	rodo.attack("Erouck");
+	rodo.showHitpoints();
+	erik.takeDamage(30);
+	erik.showHitpoints();
+	std::cout << GREEN << "~~~~~~Rodoloph  tries to high five~~~~~~~~~~~~~" << WHITE << std::endl;
+
+	//Erik repairs himself 
+	rodo.highFivesGuys();
+	std::cout << "~~~~~~~~~~~~~~~~~~~" << std::endl;
+
 	return (0);
 }

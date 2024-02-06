@@ -15,7 +15,7 @@ class ClapTrap
 		ClapTrap(const ClapTrap &copy);
 		~ClapTrap();
 		ClapTrap &operator=(const ClapTrap &copy);
-		void getHitpoints() const;
+		void showHitpoints() const;
 		void attack(const std::string &target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
