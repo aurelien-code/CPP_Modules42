@@ -11,12 +11,8 @@ Cat::Cat()
 Cat::Cat(const Cat &copy) 
 {
 	std::cout << "Cat constructor copy called"	<< std::endl;
-	if (this != &copy)
-	{
-		type = copy.getType();
-		brain = new Brain();
-		*brain = *copy.brain;
-	}
+	type = copy.getType();
+    brain = new Brain(*copy.brain);
 }
 
 Cat &Cat::operator=(const Cat &copy)
@@ -25,8 +21,13 @@ Cat &Cat::operator=(const Cat &copy)
 	if (this != &copy)
 	{
 		type = copy.getType();
-		brain = new Brain();
-		*brain = *copy.brain;
+        
+        delete brain;        
+        if (copy.brain) {
+            brain = new Brain(*copy.brain);
+        } else {
+            brain = 0;
+        }
 	}
 	return (*this);
 }

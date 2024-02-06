@@ -40,5 +40,11 @@ int main()
 	Dog* d2 = new Dog(*d1);
 	delete d1;
 	delete d2;
+
+	std::cout << GREEN << "~test deepcopies 2~" << WHITE << std::endl;
+	Dog* d3 = new Dog();
+	Dog* d4 = d3;
+	delete d3;
+	delete d4;
     return 0;
 }

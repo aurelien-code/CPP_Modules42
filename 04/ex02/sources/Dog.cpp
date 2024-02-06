@@ -25,8 +25,13 @@ Dog &Dog::operator=(const Dog &copy)
 	if (this != &copy)
 	{
 		type = copy.getType();
-		brain = new Brain();
-		*brain = *copy.brain;
+        
+        delete brain;        
+        if (copy.brain) {
+            brain = new Brain(*copy.brain);
+        } else {
+            brain = 0;
+        }
 	}
 	return (*this);
 }
