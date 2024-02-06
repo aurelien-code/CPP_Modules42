@@ -11,15 +11,6 @@ Dog::Dog()
 Dog::Dog(const Dog &copy) 
 {
 	std::cout << "Dog constructor copy called"	<< std::endl;
-	// My solution
-	// if (this != &copy)
-	// {
-	// 	type = copy.getType();
-	// 	brain = new Brain();
-	// 	*brain = *copy.brain;
-	// }
-
-	// Chat gpt solution :
 	type = copy.getType();
     brain = new Brain(*copy.brain);
 }
