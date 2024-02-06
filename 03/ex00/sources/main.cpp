@@ -16,5 +16,13 @@ int main()
 	clap_jean.takeDamage(1);
 	clap_jean.attack("");
 	clap_noname.takeDamage(10);
+	//MAKE MORE TESTS
+	ClapTrap clap("Erouck");
+	ClapTrap clap_bis("Zozivion");
+
+	clap.attack("Zozivion");
+	clap_bis.takeDamage(11);
+	clap_bis.getHitpoints();
+
 	return (0);
 }

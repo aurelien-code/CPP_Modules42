@@ -33,5 +33,24 @@ int main(void)
 	std::cout << "Point F -> result_false: " << result_F << "\n";
 	std::cout << "Point G -> result_true: " << result_G << "\n";
 	std::cout << "Point H -> result_false: " << result_H << "\n";
+
+	// SECOND TRIANGLE
+	// Point a((2.28f), (-3.32f));
+	// Point b((-4.54f), (-4.44f));
+	// Point c((-1.0f), (4.0f));
+
+	// Point D(-0.94f, -0.74f);
+	// bool result_A = bsp(a, b, c, D); // true
+
+	// Point E(-7.0f, 2.76f);
+	// bool result_E = bsp(a, b, c, E); // false
+
+	// Point F_pt(1.4f, 4);
+	// bool result_F = bsp(a, b, c, F_pt); // false
+
+	// std::cout << "Point A -> result_true: " << result_A << "\n";
+	// std::cout << "Point E -> result_false: " << result_E << "\n";
+	// std::cout << "Point F -> result_false: " << result_F << "\n";
+
 	return 0;
 }
