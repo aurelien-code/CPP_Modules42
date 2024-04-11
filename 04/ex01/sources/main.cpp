@@ -66,8 +66,6 @@ int main()
 	std::cout << "Adress of d4 = " << &d4 << std::endl;
 	std::cout << "Adress of d3.brain = " << (d3.get_brain()) << std::endl;
 	std::cout << "Adress of d4.brain = " << (d4.get_brain()) << std::endl;
-	
-
 
     return 0;
 }
