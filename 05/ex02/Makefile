@@ -2,9 +2,9 @@ CXX			=	c++
 CXXFLAGS	=	-g -Wall -Wextra -Werror -std=c++98 -Iheaders
 SRC_DIR		=	sources
 OBJ_DIR		=	objects
-NAME		=	Form
+NAME		=	AbstractForm
 
-SRC			=	main.cpp Bureaucrat.cpp Form.cpp
+SRC			=	main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJ			=	$(SRC:.cpp=.o)
 OBJ_PATH	=	$(addprefix $(OBJ_DIR)/, $(OBJ))
 

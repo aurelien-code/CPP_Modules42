@@ -1,131 +1,94 @@
+
 #include <iostream>
+#include <stdexcept>
+#include <cassert>
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #define YELLOW "\x1B[33m"
 #define WHITE "\x1B[37m"
 
-void testBureaucratCanSignForm()
-{
-	try
-	{
-		Bureaucrat bob("Bob", 30);
-		Form formB("FormB", 40, 20);
+void testInitialization() {
+    try {
+        ShrubberyCreationForm shrubbery("garden");
+        assert(shrubbery.getGradeToSign() == 145);
+        assert(shrubbery.getGradeToExecute() == 137);
+        assert(shrubbery.getName() == "garden");
 
-		std::cout << bob << std::endl;
-		std::cout << formB << std::endl;
+        RobotomyRequestForm robotomy("robot");
+        assert(robotomy.getGradeToSign() == 72);
+        assert(robotomy.getGradeToExecute() == 45);
+        assert(robotomy.getName() == "robot");
 
-		// should be ok
-		bob.signForm(formB);
-
-		std::cout << formB << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
+        PresidentialPardonForm pardon("criminal");
+        assert(pardon.getGradeToSign() == 25);
+        assert(pardon.getGradeToExecute() == 5);
+        assert(pardon.getName() == "criminal");
+    } catch (std::exception& e) {
+        std::cerr << "Initialization test failed: " << e.what() << std::endl;
+    }
 }
 
-void testBureaucratCannotSignForm()
-{
-	try
-	{
-		Bureaucrat alice("Alice", 60);
-		Form formC("FormC", 50, 30);
+void testSigning() {
+    try {
+        Bureaucrat highRanker("Alice", 1);
+        ShrubberyCreationForm shrubbery("garden");
+        highRanker.signForm(shrubbery);
+        assert(shrubbery.getIsSigned());
 
-		std::cout << alice << std::endl;
-		std::cout << formC << std::endl;
+        RobotomyRequestForm robotomy("robot");
+        highRanker.signForm(robotomy);
+        assert(robotomy.getIsSigned());
 
-		// should be Grade too low
-		alice.signForm(formC);
+        PresidentialPardonForm pardon("criminal");
+        highRanker.signForm(pardon);
+        assert(pardon.getIsSigned());
 
-		std::cout << formC << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
+        Bureaucrat lowRanker("Bob", 150);
+        ShrubberyCreationForm shrubbery2("park");
+        lowRanker.signForm(shrubbery2);
+    } catch (std::exception& e) {
+        std::cerr << "Signing test failed: " << e.what() << std::endl;
+    }
 }
 
-void testFormGradeTooHighException()
-{
-	try
-	{
-		// should be grade too high
-		Form formD("FormD", 0, 30); 
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
+void testExecution() {
+    try {
+        Bureaucrat highRanker("Alice", 1);
+        ShrubberyCreationForm shrubbery("garden");
+        shrubbery.beSigned(highRanker);
+        highRanker.executeForm(shrubbery);
+
+        RobotomyRequestForm robotomy("robot");
+        robotomy.beSigned(highRanker);
+        highRanker.executeForm(robotomy);
+        highRanker.executeForm(robotomy);
+
+        PresidentialPardonForm pardon("criminal");
+        pardon.beSigned(highRanker);
+        highRanker.executeForm(pardon);
+
+        Bureaucrat lowRanker("Bob", 150);
+        ShrubberyCreationForm shrubbery2("park");
+        shrubbery2.beSigned(highRanker);
+        lowRanker.executeForm(shrubbery2);
+    } catch (std::exception& e) {
+        std::cerr << "Execution test failed: " << e.what() << std::endl;
+    }
 }
 
-void testFormGradeTooLowException()
+int main() 
 {
-	try
-	{
-		// grade too low 
-		Form formE("FormE", 160, 30); 
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
+	std::cout << YELLOW << "initialization tests" << WHITE << std::endl;
+    testInitialization();
+	std::cout << YELLOW << "signing tests" << WHITE << std::endl;
+    testSigning();
+	std::cout << YELLOW << "execution tests" << WHITE << std::endl;
+    testExecution();
+    std::cout << "All tests passed!" << std::endl;
+    return 0;
 }
 
-void testSigningMultipleForms()
-{
-	try
-	{
-		Bureaucrat charlie("Charlie", 25);
-		Form formF("FormF", 30, 20);
-		Form formG("FormG", 20, 10);
-
-		std::cout << charlie << std::endl;
-		std::cout << formF << std::endl;
-		std::cout << formG << std::endl;
-
-		// normally ok
-		charlie.signForm(formF);
-		charlie.signForm(formG); 
-
-		std::cout << formF << std::endl;
-		std::cout << formG << std::endl;
-	}
-	catch (const std::exception &e)
-	{
-		std::cerr << "Exception: " << e.what() << std::endl;
-	}
-}
-
-int main()
-{
-	std::cout << YELLOW <<  "Test 1: Bureaucrat Can Sign Form" << WHITE << std::endl;
-	testBureaucratCanSignForm();
-	std::cout << std::endl;
-
-	std::cout << YELLOW << "Test 2: Bureaucrat Cannot Sign Form" << WHITE << std::endl;
-	testBureaucratCannotSignForm();
-	std::cout << std::endl;
-
-	std::cout << YELLOW << "Test 3: Form Grade Too High Exception" << WHITE << std::endl;
-	testFormGradeTooHighException();
-	std::cout << std::endl;
-
-	std::cout << YELLOW << "Test 4: Form Grade Too Low Exception" << WHITE << std::endl;
-	testFormGradeTooLowException();
-	std::cout << std::endl;
-
-	std::cout << YELLOW << "Test 5: Signing Multiple Forms" << WHITE << std::endl;
-	testSigningMultipleForms();
-	std::cout << std::endl;
-	return (0);
-}
-
-
-//Errors to fix :
-/*
-	t1 -> not working as expected (i think should reverify)
-	t2 -> 
-
-*/

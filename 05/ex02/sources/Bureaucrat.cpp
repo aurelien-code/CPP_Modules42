@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "stdexcept"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(const std::string name, const int grade) : _name(name), _grade(grade)
 {
@@ -55,7 +55,7 @@ void Bureaucrat::decrementGrade(void)
 		throw GradeTooLowException();
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::signForm(AForm &form)
 {
 	try
 	{
@@ -66,6 +66,19 @@ void Bureaucrat::signForm(Form &form)
 	{
         std::cout << this->_name << " couldn't sign " << form.getName() << " because grade is too low" << std::endl;
     }
+}
+
+void Bureaucrat::executeForm(AForm const &form)
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat)

@@ -1,7 +1,7 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute): 
+AForm::AForm(const std::string name, const int gradeToSign, const int gradeToExecute): 
     _name(name),
     _gradeToSign(gradeToSign),
     _gradeToExecute(gradeToExecute),
@@ -13,7 +13,7 @@ Form::Form(const std::string name, const int gradeToSign, const int gradeToExecu
         throw GradeTooHighException();
 }
 
-Form::Form(const Form &copy): 
+AForm::AForm(const AForm &copy): 
     _name(copy._name), 
     _gradeToSign(copy._gradeToSign), 
     _gradeToExecute(copy._gradeToExecute),
@@ -21,7 +21,7 @@ Form::Form(const Form &copy):
 {
 }
 
-Form &Form::operator=(const Form &ref)
+AForm &AForm::operator=(const AForm &ref)
 {
    if (this != &ref)
    {
@@ -30,32 +30,32 @@ Form &Form::operator=(const Form &ref)
    return (*this);
 }
 
-Form::~Form()
+AForm::~AForm()
 {
     return ;
 }
 
-std::string Form::getName(void) const
+std::string AForm::getName(void) const
 {
     return this->_name;
 }
 
-bool Form::getIsSigned(void) const
+bool AForm::getIsSigned(void) const
 {
     return this->_isSigned;
 }
 
-int Form::getGradeToSign(void) const
+int AForm::getGradeToSign(void) const
 {
     return this->_gradeToSign;
 }
 
-int Form::getGradeToExecute(void) const
+int AForm::getGradeToExecute(void) const
 {
     return this->_gradeToExecute;
 }
 
-bool Form::beSigned(Bureaucrat &bureaucrat)
+bool AForm::beSigned(Bureaucrat &bureaucrat)
 {
     if (bureaucrat.getGrade() < getGradeToSign())
     {
@@ -69,7 +69,15 @@ bool Form::beSigned(Bureaucrat &bureaucrat)
     return false;
 }
 
-std::ostream &operator<<(std::ostream &os, const Form &form)
+void AForm::execute(Bureaucrat const &executor) const
+{
+    if (executor.getGrade() > getGradeToExecute())
+        throw GradeTooLowException();
+    else
+       doAction(); 
+}
+
+std::ostream &operator<<(std::ostream &os, const AForm &form)
 {
     os << "Form : " << form.getName() 
 		<< "\n\tis signed : " << (form.getIsSigned() ? "yes" : "no")

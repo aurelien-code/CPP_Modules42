@@ -5,7 +5,7 @@
 #include <string>
 class Bureaucrat;
 
-class Form
+class AForm
 {
     private:
         const std::string _name;
@@ -14,23 +14,25 @@ class Form
         bool _isSigned;
     
     public:
-        Form(const std::string name, const int gradeToSign, const int gradeToExecute);
-        Form(const Form &copy);
-        Form &operator=(const Form &ref);
-        ~Form();
+        AForm(const std::string name, const int gradeToSign, const int gradeToExecute);
+        AForm(const AForm &copy);
+        AForm &operator=(const AForm &ref);
+        virtual ~AForm();
 
         std::string getName(void) const;
         bool getIsSigned(void) const;
         int getGradeToSign(void) const;
         int getGradeToExecute(void) const;
         bool beSigned(Bureaucrat &bureaucrat);
+        void execute(Bureaucrat const & executor) const;
+        virtual void doAction(void) const = 0;
 
         class GradeTooLowException: public std::exception
 		{
 			public:
 				virtual const char* what() const throw()
 				{
-					return "[ERROR] A grade cannot be lower than 150";
+					return "[ERROR] Grade is too low";
 				}
 		};
 
@@ -39,10 +41,10 @@ class Form
 			public:
 				virtual const char* what() const throw()
 				{
-					return "[ERROR] A grade cannot be higher than 1";
+					return "[ERROR] Grade is too high";
 				}
 		};
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& form);
+std::ostream& operator<<(std::ostream& os, const AForm& form);
 #endif
