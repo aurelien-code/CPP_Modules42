@@ -1,92 +1,79 @@
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
-Form::Form(): 
-	_name(""), _requiredGradeToExecute(0), _requiredGradeToSign(0), _signed(false)
+Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute): 
+    _name(name),
+    _gradeToSign(gradeToSign),
+    _gradeToExecute(gradeToExecute),
+    _isSigned(false)
 {
-	throw std::invalid_argument("Form cannot be initialized without arguments");
+    if (this->_gradeToSign > 150 || this->_gradeToExecute > 150)
+        throw GradeTooLowException();
+    if (this->_gradeToSign < 1 || this->_gradeToSign < 1)
+        throw GradeTooHighException();
 }
 
-Form::Form(const std::string name, const int gradeToSign, const int GradeToExecute): 
-	_name(name), _requiredGradeToExecute(GradeToExecute), _requiredGradeToSign(gradeToSign), _signed(false)
+Form::Form(const Form &copy): 
+    _name(copy._name), 
+    _gradeToSign(copy._gradeToSign), 
+    _gradeToExecute(copy._gradeToExecute),
+    _isSigned(copy._isSigned)
 {
-	if (getRequiredGradeToSign() > 150 || getRequiredGradeToExecute() > 150)
-	{
-		throw GradeTooLowException();
-	}
-	else if (getRequiredGradeToSign() < 1 || getRequiredGradeToExecute() < 1)
-	{
-		throw GradeTooHighException();
-	}
-}
-
-Form::Form(const Form &copy):
-	_name(copy.getName()), _requiredGradeToExecute(copy.getRequiredGradeToExecute()), _requiredGradeToSign(copy.getRequiredGradeToSign()), _signed(copy.getSigned())
-{
-	*this = copy;
 }
 
 Form &Form::operator=(const Form &ref)
 {
-	if (this != &ref)
-	{
-		this->_signed = ref.getSigned();
-	}
-	return (*this);
+   if (this != &ref)
+   {
+        this->_isSigned = ref._isSigned;
+   }
+   return (*this);
 }
 
 Form::~Form()
 {
-	return ;
+    return ;
 }
 
-std::string Form::getName() const
+std::string Form::getName(void) const
 {
-	return this->_name;
+    return this->_name;
 }
 
-bool Form::getSigned() const
+bool Form::getIsSigned(void) const
 {
-	return this->_signed;
+    return this->_isSigned;
 }
 
-int Form::getRequiredGradeToExecute() const
+int Form::getGradeToSign(void) const
 {
-	return this->_requiredGradeToExecute;
+    return this->_gradeToSign;
 }
 
-int Form::getRequiredGradeToSign() const
+int Form::getGradeToExecute(void) const
 {
-	return this->_requiredGradeToSign;
+    return this->_gradeToExecute;
 }
-
 
 bool Form::beSigned(Bureaucrat &bureaucrat)
 {
-	if (bureaucrat.getGrade() > this->getRequiredGradeToSign())
-	{
-		bureaucrat.signForm(false, "Grade too low");
-		throw GradeTooLowException();
-		return false;
-	}
-	if (this->getSigned())
-	{
-		bureaucrat.signForm(false, "Form already signed");
-		return false;
-	}
+    if (bureaucrat.getGrade() < getGradeToSign())
+    {
+		this->_isSigned = true;
+        return true;
+    }
 	else
 	{
-		this->_signed = true;
-		bureaucrat.signForm(true, this->getName());
-		return true;
+		throw GradeTooLowException();
 	}
+    return false;
 }
 
-std::ostream& operator<<(std::ostream& os, const Form& Form)
+std::ostream &operator<<(std::ostream &os, const Form &form)
 {
-	os << "FORM DETAILS:" << std::endl \
-		<< "\tName: " << Form.getName() << std::endl \
-		<< "\tGrade required to sign: " << Form.getRequiredGradeToSign() << std::endl \
-		<< "\tGrade required to execute: " << Form.getRequiredGradeToExecute() << std::endl \
-		<< "\tIs signed: " << Form.getSigned() << std::endl;
-	return os;
+    os << "Form : " << form.getName() 
+		<< "\n\tis signed : " << (form.getIsSigned() ? "yes" : "no")
+		<< "\n\trequired grade to sign : " << form.getGradeToSign() 
+		<< "\n\trequired grade to execute : " << form.getGradeToExecute();
+	return (os);
 }

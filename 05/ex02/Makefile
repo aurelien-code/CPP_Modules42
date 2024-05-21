@@ -2,7 +2,7 @@ CXX			=	c++
 CXXFLAGS	=	-g -Wall -Wextra -Werror -std=c++98 -Iheaders
 SRC_DIR		=	sources
 OBJ_DIR		=	objects
-NAME		=	Form_Up
+NAME		=	Form
 
 SRC			=	main.cpp Bureaucrat.cpp Form.cpp
 OBJ			=	$(SRC:.cpp=.o)

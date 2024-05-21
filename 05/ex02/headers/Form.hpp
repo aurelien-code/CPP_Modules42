@@ -1,36 +1,36 @@
-#include <string>
-#include "Bureaucrat.hpp"
-#include <iostream>
 
 #ifndef FORM_HPP
-# define FORM_HPP
+#define FORM_HPP
+
+#include <string>
+class Bureaucrat;
 
 class Form
 {
-	private:
-		const std::string _name;
-		const int _requiredGradeToExecute;
-		const int _requiredGradeToSign;
-		bool _signed;
-	
-	public:
-		Form();
-		Form(const std::string name, const int gradeToSign, const int GradeToExecute);
-		Form(const Form &copy);
-		Form &operator=(const Form &ref);
-		~Form();
-		std::string	getName() const;
-		int			getRequiredGradeToSign() const;
-		int			getRequiredGradeToExecute() const;
-		bool		getSigned() const;
-		bool		beSigned(Bureaucrat &bureaucrat);
-		
-		class GradeTooLowException: public std::exception
+    private:
+        const std::string _name;
+        const int _gradeToSign;
+        const int _gradeToExecute;
+        bool _isSigned;
+    
+    public:
+        Form(const std::string name, const int gradeToSign, const int gradeToExecute);
+        Form(const Form &copy);
+        Form &operator=(const Form &ref);
+        ~Form();
+
+        std::string getName(void) const;
+        bool getIsSigned(void) const;
+        int getGradeToSign(void) const;
+        int getGradeToExecute(void) const;
+        bool beSigned(Bureaucrat &bureaucrat);
+
+        class GradeTooLowException: public std::exception
 		{
 			public:
 				virtual const char* what() const throw()
 				{
-					return "[ERROR] Grade is too low to sign this form";
+					return "[ERROR] A grade cannot be lower than 150";
 				}
 		};
 
@@ -39,11 +39,10 @@ class Form
 			public:
 				virtual const char* what() const throw()
 				{
-					return "[ERROR] Grade is too high to sign this form";
+					return "[ERROR] A grade cannot be higher than 1";
 				}
 		};
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& Form);
-
+std::ostream& operator<<(std::ostream& os, const Form& form);
 #endif

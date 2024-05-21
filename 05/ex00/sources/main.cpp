@@ -1,106 +1,72 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 
+#define YELLOW  "\x1B[33m"
+#define WHITE   "\x1B[37m"
+
 int main()
 {
-    //Test empty constructor
-    {
-        std::cout << "\t~~~Test empty constructor~~~" << std::endl;
-        try {
-            Bureaucrat aurelien;
-        }
-        catch (std::exception &e) {
-            std::cout << e.what() << std::endl;
-        }
+    try {
+        std::cout << YELLOW << "=> Bureaucrat Daniel with grade 151 <=" << WHITE << std::endl;
+        Bureaucrat daniel("Daniel", 151);
+    }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    //Test good constructor
-    {
-        std::cout << "\t~~~Test good constructor~~~" << std::endl;
-        try {
-            Bureaucrat benjamin("Bob", 1);
-            std::cout << benjamin << std::endl;
-
-            if (benjamin.getName() != "Bob") {
-                std::cerr << "Test failed: Name getter returned wrong value" << std::endl;
-            }
-            if (benjamin.getGrade() != 1) {
-                std::cerr << "Test failed: Grade getter returned wrong value" << std::endl;
-            }
-        }
-        catch (std::exception &e) {
-            std::cout << e.what() << std::endl;
-        }
+    try {
+        std::cout << YELLOW << "=> Bureaucrat Louis with grade -1 <=" << WHITE << std::endl;
+        Bureaucrat louis("Louis", -1);
     }
-        
-    // Test invalid grade
-    {
-        std::cout << "\t~~~Test invalid grades (0, 151)~~~" << std::endl;
-        try {
-            Bureaucrat invalid("Invalid", 0);
-        } catch (std::exception& e) {
-            std::cout << "Caught exception: " << e.what() << std::endl;
-        }
-
-        try {
-            Bureaucrat invalid("Invalid", 151);
-        } catch (std::exception& e) {
-            std::cout << "Caught exception: " << e.what() << std::endl;
-        }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    //Test invalid increment
-    {
-        std::cout << "\t~~~Test invalid increment, dec ; inc ; inc~~~" << std::endl;
-        try
-        {
-            Bureaucrat highest("Highest", 1);
-            highest.decrementGrade();
-            std::cout << highest << std::endl;
-            highest.incrementGrade();
-            highest.incrementGrade();
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-        
+    try {
+        std::cout << YELLOW << "=> Decrement Bureaucrat with a 150 grade <=" << WHITE << std::endl;
+        Bureaucrat bilal("Bilal", 150);
+        bilal.decrementGrade();
+    }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    //Test invalid decrement
-    {
-        std::cout << "\t~~~Test invalid decrement, inc ; dec ; dec~~~" << std::endl;
-        try
-        {
-            Bureaucrat lowest("Lowest", 150);
-            lowest.incrementGrade();
-            std::cout << lowest << std::endl;
-            lowest.decrementGrade();
-            lowest.decrementGrade();
-        }
-        catch(const std::exception& e)
-        {
-            std::cerr << e.what() << '\n';
-        }
-        
+    try {
+        std::cout << YELLOW << "=> Increment Bureaucrat with a 1 grade <=" << WHITE << std::endl;
+        Bureaucrat james("James", 1);
+        james.incrementGrade();
+    }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
     }
 
-    //Test the assignement operator
-    {
-        std::cout << "\t~~~Test assignement operator~~~" << std::endl;
-        try {
-            Bureaucrat assign_op = Bureaucrat("ASOP", 55);
-            Bureaucrat assign_op2 = Bureaucrat("ASSOP2", 110);
-            std::cout << assign_op << std::endl;
-            std::cout << assign_op2 << std::endl;
-            std::cout << "assign_op = assign_op2" << std::endl;
-            assign_op = assign_op2;
-            std::cout << assign_op << std::endl;
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << e.what() << std::endl;
-        }
+    try {
+        std::cout << YELLOW << "=> All good operations tests <=" << WHITE << std::endl;
+        Bureaucrat jerem("Jerem", 22);
+        std::cout << jerem << std::endl;
+        jerem.decrementGrade();
+        std::cout << jerem << std::endl;
+        jerem.incrementGrade();
+        std::cout << jerem << std::endl;
     }
+    catch (const std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
+
+    try {
+        std::cout << YELLOW << "=> Test assignement operator <=" << WHITE << std::endl;
+        Bureaucrat assign_op = Bureaucrat("ASOP", 55);
+        Bureaucrat assign_op2 = Bureaucrat("ASSOP_2", 110);
+        std::cout << assign_op << std::endl;
+        std::cout << assign_op2 << std::endl;
+        std::cout << "assign_op = assign_op2" << std::endl;
+        assign_op = assign_op2;
+        std::cout << assign_op << std::endl;
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    
 	return (0);
 }
