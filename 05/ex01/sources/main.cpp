@@ -121,11 +121,3 @@ int main()
 	std::cout << std::endl;
 	return (0);
 }
-
-
-//Errors to fix :
-/*
-	t1 -> not working as expected (i think should reverify)
-	t2 -> 
-
-*/

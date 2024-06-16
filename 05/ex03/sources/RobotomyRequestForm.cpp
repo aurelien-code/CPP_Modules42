@@ -1,6 +1,11 @@
 #include "RobotomyRequestForm.hpp"
 #include <iostream>
 
+RobotomyRequestForm::RobotomyRequestForm(void)
+{
+    
+}
+
 RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm(target, 72, 45)
 {
 }

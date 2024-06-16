@@ -14,6 +14,7 @@ class AForm
         bool _isSigned;
     
     public:
+        AForm(void);
         AForm(const std::string name, const int gradeToSign, const int gradeToExecute);
         AForm(const AForm &copy);
         AForm &operator=(const AForm &ref);

@@ -14,6 +14,7 @@ class Form
         bool _isSigned;
     
     public:
+        Form(void);
         Form(const std::string name, const int gradeToSign, const int gradeToExecute);
         Form(const Form &copy);
         Form &operator=(const Form &ref);

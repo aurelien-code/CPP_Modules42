@@ -1,6 +1,10 @@
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
 
+Form::Form(void): _name("defaultForm"), _gradeToSign(0), _gradeToExecute(0), _isSigned(0)
+{
+}
+
 Form::Form(const std::string name, const int gradeToSign, const int gradeToExecute): 
     _name(name),
     _gradeToSign(gradeToSign),

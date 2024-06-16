@@ -11,8 +11,10 @@
 #define YELLOW "\x1B[33m"
 #define WHITE "\x1B[37m"
 
-void testInitialization() {
-    try {
+void testInitialization()
+{
+    try
+    {
         ShrubberyCreationForm shrubbery("garden");
         assert(shrubbery.getGradeToSign() == 145);
         assert(shrubbery.getGradeToExecute() == 137);
@@ -27,13 +29,17 @@ void testInitialization() {
         assert(pardon.getGradeToSign() == 25);
         assert(pardon.getGradeToExecute() == 5);
         assert(pardon.getName() == "criminal");
-    } catch (std::exception& e) {
+    }
+    catch (std::exception& e)
+    {
         std::cerr << "Initialization test failed: " << e.what() << std::endl;
     }
 }
 
-void testSigning() {
-    try {
+void testSigning()
+{
+    try
+    {
         Bureaucrat highRanker("Alice", 1);
         ShrubberyCreationForm shrubbery("garden");
         highRanker.signForm(shrubbery);
@@ -50,13 +56,17 @@ void testSigning() {
         Bureaucrat lowRanker("Bob", 150);
         ShrubberyCreationForm shrubbery2("park");
         lowRanker.signForm(shrubbery2);
-    } catch (std::exception& e) {
+    }
+    catch (std::exception& e)
+    {
         std::cerr << "Signing test failed: " << e.what() << std::endl;
     }
 }
 
-void testExecution() {
-    try {
+void testExecution()
+{
+    try
+    {
         Bureaucrat highRanker("Alice", 1);
         ShrubberyCreationForm shrubbery("garden");
         shrubbery.beSigned(highRanker);
@@ -75,7 +85,9 @@ void testExecution() {
         ShrubberyCreationForm shrubbery2("park");
         shrubbery2.beSigned(highRanker);
         lowRanker.executeForm(shrubbery2);
-    } catch (std::exception& e) {
+    }
+    catch (std::exception& e)
+    {
         std::cerr << "Execution test failed: " << e.what() << std::endl;
     }
 }

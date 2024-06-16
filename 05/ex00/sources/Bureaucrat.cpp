@@ -1,6 +1,11 @@
 #include "Bureaucrat.hpp"
 #include "stdexcept"
 
+Bureaucrat::Bureaucrat(void)
+{
+	throw std::runtime_error("Bureaucrat object cannot be created without a name and a grade");
+}
+
 Bureaucrat::Bureaucrat(const std::string name, const int grade) : _name(name), _grade(grade)
 {
 	if (this->_grade < 1)
