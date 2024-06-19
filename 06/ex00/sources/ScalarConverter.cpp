@@ -184,19 +184,16 @@ void ScalarConverter::convert(const std::string &str)
         if (str == infinity_cases[i])
 		{
 			handle_infinity_cases(str);
-			return ;
 		}
     }
 
     if (str.find('.') != str.npos && str.find('f') == str.length() - 1)
     {
 		handle_float_cases(str);
-		return ;
     }
 	else if (str.find('.') != str.npos)
 	{
 		handle_double_cases(str);
-		return ;
 	}
 	else
 	{
