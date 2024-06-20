@@ -16,9 +16,13 @@ Array<T>::Array(unsigned int n): items(new T[n]), _size(n)
 }
 
 template <typename T>
-Array<T>::Array(const Array &ref): items(NULL), _size(0)
+Array<T>::Array(const Array &ref): _size(ref._size)
 {
-    *this = ref;
+    items = new T[ref._size];
+    for (int i = 0; i < static_cast<int>(ref._size); ++i)
+    {
+        items[i] = ref.items[i];
+    }
 }
 
 template <typename T>
