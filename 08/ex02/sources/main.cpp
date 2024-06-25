@@ -33,7 +33,7 @@ int main()
 	}
 
 	std::cout << std::endl;
-
+	
     {
         std::list<int> mstack;
         mstack.push_back(5);
@@ -49,11 +49,11 @@ int main()
         std::list<int>::iterator ite = mstack.end();
         ++it;
         --it;
-        while (it != ite) {
+        while (it != ite)
+		{
             std::cout << *it << std::endl;
             ++it;
         }
-       // std::stack<int> s(mstack);
     }
 	return (0);
 }

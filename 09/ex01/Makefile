@@ -2,9 +2,9 @@ CXX			=	c++
 CXXFLAGS	=	-g -Wall -Wextra -Werror -std=c++98 -Iheaders
 SRC_DIR		=	sources
 OBJ_DIR		=	objects
-NAME		=	btc
+NAME		=	RPN
 
-SRC			=	main.cpp BitcoinExchange.cpp
+SRC			=	main.cpp \
 OBJ			=	$(SRC:.cpp=.o)
 OBJ_PATH	=	$(addprefix $(OBJ_DIR)/, $(OBJ))
 
