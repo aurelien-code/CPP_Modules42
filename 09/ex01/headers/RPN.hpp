@@ -3,6 +3,8 @@
 
 #include <stack>
 #include <string>
+#include <iostream>
+#include <sstream>
 
 class RPN
 {
@@ -21,12 +23,3 @@ class RPN
 };
 
 #endif
-
-/*
-	TOOD :
-		- Handle crash cases like : 0 0 /
-		- Handle bad cases 
-			=> numbers over 10
-			=> negative numbers 
-			=> forbidden character likes () {} ...
-*/

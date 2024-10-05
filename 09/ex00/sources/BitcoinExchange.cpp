@@ -6,6 +6,7 @@ BitcoinExchange::BitcoinExchange(void)
 	throw std::logic_error("Class BitcoinExchange cannot be instancied without an input file");
 }
 
+
 BitcoinExchange::BitcoinExchange(std::string &input_file): _data_file_path("./data.csv")
 {
 	this->_input_file_path = input_file;
@@ -120,7 +121,7 @@ void BitcoinExchange::parse_data(void)
     while (std::getline(file, line)) {
         std::string date = line.substr(0, 10);
         std::string value = line.substr(11);
-        
+
 		try
 		{
 			int timestamp = epoch_encoder(date);
@@ -156,7 +157,7 @@ float BitcoinExchange::find_closest_values(int &timestamp, float &nb_of_btc) con
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
+
 	return bitcoin_value;
 }
 
@@ -182,7 +183,7 @@ void BitcoinExchange::run(void)
 			continue;
 		}
 		else
-		{ 
+		{
 			date = line.substr(0, 10);
 			value = line.substr(12);
 		}
@@ -192,11 +193,11 @@ void BitcoinExchange::run(void)
 			std::cout << "[Error] Invalid date : " << date << std::endl;
 			continue;
 		}
-		
+
 		std::stringstream ss(value);
 		ss >> number_of_btc;
-		
-		if (number_of_btc < 0) 
+
+		if (number_of_btc < 0)
 		{
 			std::cout << "[Error] number is too small (" << number_of_btc << ")" << std::endl;
 			continue;
@@ -206,7 +207,7 @@ void BitcoinExchange::run(void)
 			std::cout << "[Error] number is too large (" << number_of_btc << ")" << std::endl;
 			continue;
 		}
-		
+
 		try
 		{
 			timestamp = epoch_encoder(date);
@@ -215,7 +216,7 @@ void BitcoinExchange::run(void)
 		{
 			std::cerr << e.what() << '\n';
 		}
-		
+
 
 		if (_data_parsed.find(timestamp) == _data_parsed.end())
 		{

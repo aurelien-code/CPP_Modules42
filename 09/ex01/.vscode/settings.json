@@ -1,7 +1,5 @@
 {
 	"files.associations": {
-		"*.hpp": "cpp",
-		"*.tpp": "cpp",
 		"array": "cpp",
 		"atomic": "cpp",
 		"bit": "cpp",
@@ -19,7 +17,6 @@
 		"cwchar": "cpp",
 		"cwctype": "cpp",
 		"deque": "cpp",
-		"map": "cpp",
 		"unordered_map": "cpp",
 		"vector": "cpp",
 		"exception": "cpp",
@@ -47,15 +44,9 @@
 		"ostream": "cpp",
 		"ranges": "cpp",
 		"span": "cpp",
+		"sstream": "cpp",
 		"stdexcept": "cpp",
 		"streambuf": "cpp",
-		"typeinfo": "cpp",
-		"ctime": "cpp",
-		"fstream": "cpp",
-		"sstream": "cpp",
-		"iomanip": "cpp",
-		"list": "cpp",
-		"set": "cpp"
-	},
-	"C_Cpp.errorSquiggles": "disabled"
+		"typeinfo": "cpp"
+	}
 }
